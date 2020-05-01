@@ -4,13 +4,15 @@
   "description": "A simple intro to GraphQL",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon index.js"
   },
   "author": "Montacer Dkhilali",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
-    "graphql": "^15.0.0"
+    "graphql": "^15.0.0",
+    "nodemon": "^2.0.3"
   }
 }
