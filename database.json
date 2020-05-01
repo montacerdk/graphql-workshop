@@ -1,0 +1,14 @@
+{
+  "users": [
+    { "id": "23", "name": "Montacer Dkhilali", "age": 26, "companyId": "01" },
+    { "id": "33", "name": "John Doe", "age": 36, "companyId": "02" }
+  ],
+  "companies": [
+    {
+      "id": "01",
+      "name": "Breakpoint Technology",
+      "description": "Technology company"
+    },
+    { "id": "02", "name": "Microsoft", "description": "Technology company" }
+  ]
+}

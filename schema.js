@@ -1,3 +1,5 @@
+const database = require("./database.json");
+
 const {
   GraphQLObjectType,
   GraphQLSchema,
@@ -5,10 +7,14 @@ const {
   GraphQLInt,
 } = require("graphql");
 
-const users = [
-  { id: "23", name: "Montacer Dkhilali", age: 26 },
-  { id: "33", name: "John Doe", age: 36 },
-];
+const CompanyType = new GraphQLObjectType({
+  name: "Company",
+  fields: {
+    id: { type: GraphQLString },
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
+  },
+});
 
 const UserType = new GraphQLObjectType({
   name: "User",
@@ -16,6 +22,11 @@ const UserType = new GraphQLObjectType({
     id: { type: GraphQLString },
     name: { type: GraphQLString },
     age: { type: GraphQLInt },
+    company: {
+      type: CompanyType,
+      resolve: (_) =>
+        database.companies.find((company) => company.id === _.companyId),
+    },
   },
 });
 
@@ -25,7 +36,7 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { id: { type: GraphQLString } },
-      resolve: (_, args) => users.find((user) => user.id === args.id),
+      resolve: (_, args) => database.users.find((user) => user.id === args.id),
     },
   },
 });
