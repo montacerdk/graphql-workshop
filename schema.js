@@ -24,8 +24,10 @@ const UserType = new GraphQLObjectType({
     age: { type: GraphQLInt },
     company: {
       type: CompanyType,
-      resolve: (_) =>
-        database.companies.find((company) => company.id === _.companyId),
+      resolve: (parentValue) =>
+        database.companies.find(
+          (company) => company.id === parentValue.companyId
+        ),
     },
   },
 });
@@ -36,7 +38,14 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { id: { type: GraphQLString } },
-      resolve: (_, args) => database.users.find((user) => user.id === args.id),
+      resolve: (parentValue, args) =>
+        database.users.find((user) => user.id === args.id),
+    },
+    company: {
+      type: CompanyType,
+      args: { id: { type: GraphQLString } },
+      resolve: (parentValue, args) =>
+        database.companies.find((company) => company.id === args.id),
     },
   },
 });
